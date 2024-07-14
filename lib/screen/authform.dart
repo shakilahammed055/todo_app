@@ -87,9 +87,39 @@ class _AuthFormState extends State<AuthForm> {
                   ),
                   // if(!_isLogin)
                   SizedBox(
-                    height: 20,
+                    height: 10,
                   ),
-                    TextFormField(
+                    if(!_isLogin)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: TextFormField(
+                        // validator: (value){
+                        //   if(value!.isEmpty|| value.length<7){
+                        //     return "please enter a valid password";
+                        //   }
+                        //   return null;
+                        // },
+                        onSaved: (value){
+                          _username= value!;
+                        },
+                        key: ValueKey("username"),
+                        decoration: InputDecoration(
+                          labelText: "User name",
+                          hintText: "Enter your user name",
+                          labelStyle: GoogleFonts.roboto(),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                      ),
+                    ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: TextFormField(
+                      obscureText: true,
                       validator: (value){
                         if(value!.isEmpty|| value.length<7){
                           return "please enter a valid password";
@@ -99,16 +129,59 @@ class _AuthFormState extends State<AuthForm> {
                       onSaved: (value){
                         _username= value!;
                       },
-                      key: ValueKey("username"),
+                      key: ValueKey("password"),
                       decoration: InputDecoration(
-                        labelText: "User name",
-                        hintText: "Enter your user name",
+                        labelText: "Password",
+                        hintText: "Enter your password",
                         labelStyle: GoogleFonts.roboto(),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                     ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    height: 60,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.blue,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: (){
+                        startauthentication();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                      ),
+                      child: Text(
+                        _isLogin ? "login" : "sign Up",
+                        style: GoogleFonts.roboto(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    child: TextButton(
+                      onPressed: (){
+                        setState(() {
+                          _isLogin = !_isLogin;
+                        });
+                      },
+                      child: Text(
+                        _isLogin ? "create new account" : "I already have an account",
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),
